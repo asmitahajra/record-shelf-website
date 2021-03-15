@@ -1,4 +1,5 @@
-// import logo from './logo.svg';
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-unused-vars */
 import './App.css';
 import React, { useState } from 'react';
 // import { useHistory } from 'react-router-dom';
@@ -30,6 +31,33 @@ const App = () => {
       ...eachSong, like: songLiked.like, count: songLiked.count,
     } : eachSong));
     setSongInventory(newSongInventory);
+  };
+
+  const onIncrementForGenre = async (id) => {
+    let eachCat;
+    let songGet;
+    let likedOrNot;
+    let songCat;
+
+    for (const songCategory of Object.keys(groupedSongs)) {
+      eachCat = groupedSongs[songCategory];
+      songGet = eachCat.find((song) => song.id === id);
+      likedOrNot = !songGet.like;
+      songCat = songGet.genre;
+      if (songGet) {
+        break;
+      }
+    }
+
+    const songLiked = await apiUtil.updateSongLikes(id, likedOrNot);
+    const newCategory = groupedSongs[songCat];
+    const index = newCategory.findIndex((e) => e.id === songGet.id);
+    // const newSongInventory = songInventory.map((eachSong) => (eachSong.id === id ? {
+    //   ...eachSong, like: songLiked.like, count: songLiked.count,
+    // } : eachSong));
+    const newSongObject = { ...songGet, like: songLiked.like, count: songLiked.count };
+    newCategory[index] = newSongObject;
+    setGroupedSongs(groupedSongs);
   };
 
   const groupByGenre = (songs) => songs.reduce((acc, eachSong) => {
@@ -78,7 +106,7 @@ const App = () => {
             <Home songInventory={songInventory} onIncrement={onIncrement} />
           </Route>
           <Route path="/genre">
-            <Genre groupedSongs={groupedSongs} />
+            <Genre groupedSongs={groupedSongs} onIncrement={onIncrementForGenre} />
           </Route>
           <Route path="/" exact>
             <LandingPage getInventory={getInventory} />

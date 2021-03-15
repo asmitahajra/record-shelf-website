@@ -2,8 +2,14 @@ import './Header.scss';
 import React from 'react';
 
 const Header = () => (
-  <div>
-    <h1>My Record Shelf</h1>
+  <div className="header">
+    <h1>
+      My
+      {' '}
+      <b>Record</b>
+      {' '}
+      Shelf
+    </h1>
   </div>
 );
 

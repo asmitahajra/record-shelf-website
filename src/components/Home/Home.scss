@@ -1,0 +1,24 @@
+.home {
+    .all-songs-header {
+        display: flex;
+        justify-content: space-between;
+
+        .image-genre {
+            width: 2.5rem;
+            height: 3rem;
+            float: right;
+            margin-right: 1rem;
+        }
+
+        .all-songs {
+            margin-left: 6rem;
+            font-size: x-large;
+        }
+    }
+
+    .cards {
+        margin-left: 5rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

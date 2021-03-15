@@ -1,0 +1,54 @@
+.genre {
+    .genre-header {
+        display: flex;
+        justify-content: space-between;
+
+        .genre-image {
+            width: 3rem;
+            height: 3rem;
+            float: right;
+            margin-right: 1rem;
+            margin-top: 0.5rem;
+        }
+    
+        .genre-text {
+            margin-left: 6rem;
+            font-size: x-large;
+        }
+    }
+
+    .cards {
+        .genre-head {
+            display: flex;
+
+            .genre-logo {
+                width: 7rem;
+                height: 7rem;
+                margin-left: 1rem;
+            }
+
+            .genre-heading {
+                background-color:  #4C63AA;
+                color: white;
+                height: 5rem;
+                width:10rem;
+                border-radius: 3rem;
+                text-align: center;
+            }
+            
+        } 
+        margin-left: 5rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        .genre-header {
+            margin-left: 1rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+}

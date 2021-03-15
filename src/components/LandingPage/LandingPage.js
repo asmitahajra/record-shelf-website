@@ -25,10 +25,12 @@ const LandingPage = ({ getInventory }) => {
   };
 
   return (
-    <div>
-      <h1>:(((</h1>
+    <div className="landing">
+      <h1>:((</h1>
       <h1>Seems a bit empty in here...</h1>
-      <button type="button" onClick={syncUp}>Sync</button>
+      <div className="sync-button">
+        <button type="button" onClick={syncUp}>Sync</button>
+      </div>
     </div>
   );
 };

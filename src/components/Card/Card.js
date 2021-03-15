@@ -15,12 +15,24 @@ const Card = ({ eachSong, onIncrement }) => {
   }
   return (
     <div className="card">
-      <img data-testid="card-img" src={albumArtUrl} alt={nameSong} className="image" />
-      {nameSong}
-      <br />
-      {artist}
-      <button type="button" onClick={onIncrement}><img data-testid="card-img" src={heart} alt="like-button" className="like" /></button>
-      {count}
+      <img data-testid="card-img" src={albumArtUrl} alt={nameSong} className="card-image" />
+      <div className="details">
+        <div className="song-artist">
+          <div className="song">
+            {nameSong}
+          </div>
+          <br />
+          <div className="artist">
+            <b>{artist}</b>
+          </div>
+        </div>
+        <div className="like">
+          <button type="button" onClick={onIncrement}>
+            <img data-testid="card-img" src={heart} alt="like-button" className="like-image" />
+            {count}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
