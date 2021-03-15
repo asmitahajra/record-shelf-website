@@ -1,5 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import './Home.scss';
 import React from 'react';
@@ -20,7 +18,11 @@ const Home = ({ songInventory, onIncrement }) =>
       <div className="cards">
         {/* {abc} */}
         {songInventory.map((eachSong) => (
-          <Card key={eachSong.id} eachSong={eachSong} onIncrement={() => onIncrement(eachSong.id)} />
+          <Card
+            key={eachSong.id}
+            eachSong={eachSong}
+            onIncrement={() => onIncrement(eachSong.id)}
+          />
         ))}
       </div>
     </div>

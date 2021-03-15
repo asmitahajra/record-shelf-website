@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import './Card.scss';
 import React from 'react';
 // import { Link } from 'react-router-dom';
@@ -35,6 +36,10 @@ const Card = ({ eachSong, onIncrement }) => {
       </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  onIncrement: PropTypes.func.isRequired,
 };
 
 export default Card;
