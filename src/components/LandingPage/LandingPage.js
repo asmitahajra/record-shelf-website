@@ -1,19 +1,18 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import './LandingPage.scss';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
+import React from 'react';
 import apiUtil from '../../utils/api';
 
 const LandingPage = ({ getInventory }) => {
   const history = useHistory();
-  const [songs, setSongs] = useState([]);
+  // const [songs, setSongs] = useState([]);
   // const [songLikes, setSongLikes] = useState([]);
 
   const syncUp = async () => {
     const songObjects = await apiUtil.getSongs();
-    console.log(songObjects);
-    setSongs(songObjects);
+    // console.log(songObjects);
+    // setSongs(songObjects);
 
     // const songLikesObjects = await apiUtil.getSongLikes('07075cdb-9e5c-41ec-8c09-9a1322dd92d8');
     // console.log(songLikesObjects);
@@ -31,6 +30,10 @@ const LandingPage = ({ getInventory }) => {
       </div>
     </div>
   );
+};
+
+LandingPage.propTypes = {
+  getInventory: PropTypes.func.isRequired,
 };
 
 export default LandingPage;

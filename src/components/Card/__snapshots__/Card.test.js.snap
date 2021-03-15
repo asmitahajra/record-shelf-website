@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card should match snapshot 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <img
+      alt="artist"
+      class="card-image"
+      data-testid="card-img"
+      src="abc"
+    />
+    <div
+      class="details"
+    >
+      <div
+        class="song-artist"
+      >
+        <div
+          class="song"
+        >
+          artist
+        </div>
+        <br />
+        <div
+          class="artist"
+        >
+          <b>
+            abc
+          </b>
+        </div>
+      </div>
+      <div
+        class="like"
+      >
+        <button
+          type="button"
+        >
+          <img
+            alt="like-button"
+            class="like-image"
+            data-testid="card-img"
+            src="../assets/heart-red.svg"
+          />
+          5
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

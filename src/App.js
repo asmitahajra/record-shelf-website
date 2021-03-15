@@ -1,10 +1,7 @@
 /* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-unused-vars */
 import './App.css';
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
-// import React from 'react';
 import {
   BrowserRouter, Switch, Route,
 } from 'react-router-dom';
