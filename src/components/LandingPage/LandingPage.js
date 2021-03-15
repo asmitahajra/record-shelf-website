@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import './LandingPage.scss';
-import {
-  BrowserRouter, Switch, Route, useHistory,
-} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
 import apiUtil from '../../utils/api';
 

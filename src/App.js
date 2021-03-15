@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-unused-vars */
 import './App.css';
@@ -19,47 +20,6 @@ const App = () => {
   const [groupedSongs, setGroupedSongs] = useState([]);
   // const [songLikeInventory, setSongLikeInventory] = useState([]);
 
-  const onIncrement = async (id) => {
-    const songGet = songInventory.find((song) => song.id === id);
-    const likedOrNot = !songGet.like;
-    console.log(id);
-    console.log(likedOrNot);
-    const songLiked = await apiUtil.updateSongLikes(id, likedOrNot);
-    console.log(songLiked);
-
-    const newSongInventory = songInventory.map((eachSong) => (eachSong.id === id ? {
-      ...eachSong, like: songLiked.like, count: songLiked.count,
-    } : eachSong));
-    setSongInventory(newSongInventory);
-  };
-
-  const onIncrementForGenre = async (id) => {
-    let eachCat;
-    let songGet;
-    let likedOrNot;
-    let songCat;
-
-    for (const songCategory of Object.keys(groupedSongs)) {
-      eachCat = groupedSongs[songCategory];
-      songGet = eachCat.find((song) => song.id === id);
-      likedOrNot = !songGet.like;
-      songCat = songGet.genre;
-      if (songGet) {
-        break;
-      }
-    }
-
-    const songLiked = await apiUtil.updateSongLikes(id, likedOrNot);
-    const newCategory = groupedSongs[songCat];
-    const index = newCategory.findIndex((e) => e.id === songGet.id);
-    // const newSongInventory = songInventory.map((eachSong) => (eachSong.id === id ? {
-    //   ...eachSong, like: songLiked.like, count: songLiked.count,
-    // } : eachSong));
-    const newSongObject = { ...songGet, like: songLiked.like, count: songLiked.count };
-    newCategory[index] = newSongObject;
-    setGroupedSongs(groupedSongs);
-  };
-
   const groupByGenre = (songs) => songs.reduce((acc, eachSong) => {
     const newSong = {
       ...eachSong,
@@ -72,11 +32,56 @@ const App = () => {
     return acc;
   }, {});
 
+  const onIncrement = async (id) => {
+    const songGet = songInventory.find((song) => song.id === id);
+    const likedOrNot = !songGet.like;
+    const songLiked = await apiUtil.updateSongLikes(id, likedOrNot);
+
+    const newSongInventory = songInventory.map((eachSong) => (eachSong.id === id ? {
+      ...eachSong, like: songLiked.like, count: songLiked.count,
+    } : eachSong));
+    setSongInventory(newSongInventory);
+    const groupedSongObjects = groupByGenre(newSongInventory);
+    setGroupedSongs(groupedSongObjects);
+  };
+
+  const onIncrementForGenre = async (id) => {
+    let eachCat;
+    let songGet;
+    let likedOrNot;
+    let songCat;
+
+    for (const songCategory of Object.keys(groupedSongs)) {
+      eachCat = groupedSongs[songCategory];
+      songGet = eachCat.find((song) => song.id === id);
+      if (!songGet) {
+        continue;
+      }
+      likedOrNot = !songGet.like;
+      songCat = songCategory;
+      if (songGet) {
+        break;
+      }
+    }
+
+    const songLiked = await apiUtil.updateSongLikes(id, likedOrNot);
+    const newCategory = groupedSongs[songCat];
+    const index = newCategory.findIndex((e) => e.id === songGet.id);
+
+    const newSongObject = { ...songGet, like: songLiked.like, count: songLiked.count };
+    newCategory[index] = newSongObject;
+    const newGroupedSongs = { ...groupedSongs, songCat: newCategory };
+    setGroupedSongs(newGroupedSongs);
+
+    // now to set setate in song inventory->
+    const newSongInventory = songInventory.map((eachSong) => (eachSong.id === id ? {
+      ...eachSong, like: songLiked.like, count: songLiked.count,
+    } : eachSong));
+    setSongInventory(newSongInventory);
+  };
+
   const getSongObjects = (items) => items.map(async (item) => {
     const songLikesObject = await apiUtil.getSongLikes(item.id);
-    // console.log(item.id);
-    // console.log(songLikesObject);
-    // console.log(songLikesObject.count);
     const newSong = {
       id: item.id,
       nameSong: item.name,
@@ -92,7 +97,6 @@ const App = () => {
   const getInventory = async (song) => {
     const songObjects = await Promise.all(getSongObjects(song));
     setSongInventory(songObjects);
-    // console.log({ songObjects });
     const groupedSongObjects = groupByGenre(songObjects);
     setGroupedSongs(groupedSongObjects);
   };
