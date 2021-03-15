@@ -12,9 +12,15 @@ const getSongs = async () => {
 
 const getSongLikes = async (recordId) => {
   // const allItems = await axios.get('https://musicrecordsapi.azurewebsites.net/api/records');
-  const songLinkes = await axios.get(`/records/${recordId}/likes`, { headers: { Authorization: authStr } });
+  const songLikes = await axios.get(`/records/${recordId}/likes`, { headers: { Authorization: authStr } });
   // console.log(allSongs.data.data);
-  return songLinkes.data.data;
+  return songLikes.data.data;
+};
+
+const updateSongLikes = async (recordId, likedOrNot) => {
+  const songLikes = await axios.patch(`/records/${recordId}/likes`, { like: likedOrNot }, { headers: { Authorization: authStr } });
+  // console.log(allSongs.data.data);
+  return songLikes.data.data;
 };
 
 // const getOrders = async () => {
@@ -33,4 +39,4 @@ const getSongLikes = async (recordId) => {
 // };
 
 // getItems();
-export default { getSongs, getSongLikes };
+export default { getSongs, getSongLikes, updateSongLikes };

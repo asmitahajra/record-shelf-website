@@ -3,18 +3,19 @@
 /* eslint-disable react/prop-types */
 import './Home.scss';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 // import { Link } from 'react-router-dom';
 
-const Home = ({ songInventory }) =>
+const Home = ({ songInventory, onIncrement }) =>
   // const abc = JSON.stringify(songInventory);
   (
     <>
-      <img data-testid="card-img" src="../assets/icon-grid.svg" alt="grid-button" className="image" />
+      <Link to="/genre"><img data-testid="card-img" src="../assets/icon-genre.svg" alt="grid-button" className="image" /></Link>
       <div>
         {/* {abc} */}
         {songInventory.map((eachSong) => (
-          <Card key={eachSong.id} eachSong={eachSong} />
+          <Card key={eachSong.id} eachSong={eachSong} onIncrement={() => onIncrement(eachSong.id)} />
         ))}
       </div>
     </>
